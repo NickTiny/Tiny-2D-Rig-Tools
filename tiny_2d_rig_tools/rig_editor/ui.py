@@ -98,7 +98,7 @@ class TINY2DRIG_PT_rig_grease_pencil(bpy.types.Panel):
                      icon="OUTLINER_DATA_GP_LAYER")
         col.operator("tiny2drig.gp_rig_via_lattice", icon="MOD_LATTICE")
         layout.operator(
-            "rigtools.gp_add_time_offset_with_driver", icon="MOD_TIME")
+            "tiny2drig.gp_add_time_offset_with_driver", icon="MOD_TIME")
         
 
 
