@@ -46,7 +46,7 @@ import bpy
 # Imports data that should be read from a JSON file or other imported text format.
 
 
-class RIGTOOLS_rig_edit_base_class(bpy.types.Operator):
+class TINY2DRIG_rig_edit_base_class(bpy.types.Operator):
     """Base Class for all Rig Edit Operations"""
 
     @classmethod
@@ -60,7 +60,7 @@ class RIGTOOLS_rig_edit_base_class(bpy.types.Operator):
         return res
 
 
-class RIGTOOLS_rig_gp_base_class(bpy.types.Operator):
+class TINY2DRIG_rig_gp_base_class(bpy.types.Operator):
     """Base Class for all Rig Edit Operations"""
 
     @classmethod
@@ -77,7 +77,7 @@ class RIGTOOLS_rig_gp_base_class(bpy.types.Operator):
         return True
 
 
-class RIGTOOLS_turnaround_base_class(bpy.types.Operator):
+class TINY2DRIG_turnaround_base_class(bpy.types.Operator):
     """Base Class for all Rig Edit Operations"""
 
     @classmethod
@@ -101,8 +101,8 @@ class RIGTOOLS_turnaround_base_class(bpy.types.Operator):
             return True
 
 
-class RIGTOOLS_gp_set_mod_const(bpy.types.Operator):
-    bl_idname = "rigools.enable_gp_mod_const"
+class TINY2DRIG_gp_set_mod_const(bpy.types.Operator):
+    bl_idname = "tiny2drig.enable_gp_mod_const"
     bl_label = "Toggle Visability of All Modifiers & Constraints"
     bl_description = "Enable/Disable visablitiy of modifiers and constraints on grease pencil active object"
     bl_options = {"REGISTER", "UNDO"}
@@ -125,8 +125,8 @@ class RIGTOOLS_gp_set_mod_const(bpy.types.Operator):
         return {"FINISHED"}
 
 
-class RIGTOOLS_gp_set_mod_const_all(bpy.types.Operator):
-    bl_idname = "rigools.enable_all_gp_mod_const_all"
+class TINY2DRIG_gp_set_mod_const_all(bpy.types.Operator):
+    bl_idname = "tiny2drig.enable_all_gp_mod_const_all"
     bl_label = "Unhide all Modifers & Constraints"
     bl_description = "Ensure Modifers and Constraints are visable/enabled on all grease pencil objects"
     bl_options = {"REGISTER", "UNDO"}
@@ -140,8 +140,8 @@ class RIGTOOLS_gp_set_mod_const_all(bpy.types.Operator):
         return {"FINISHED"}
 
 
-class RIGTOOLS_OT_create_armatue(bpy.types.Operator):
-    bl_idname = "rigools.create_2d_armature"
+class TINY2DRIG_OT_create_armatue(bpy.types.Operator):
+    bl_idname = "tiny2drig.create_2d_armature"
     bl_label = "Create Armature"
     bl_description = "Create a new base armature object, matching conventions set in armature preferences."
     bl_options = {"REGISTER", "UNDO"}
@@ -225,8 +225,8 @@ class RIGTOOLS_OT_create_armatue(bpy.types.Operator):
         return {"FINISHED"}
 
 
-class RIGTOOLS_initialize_rig(bpy.types.Operator):
-    bl_idname = "rigools.initialize_rig"
+class TINY2DRIG_initialize_rig(bpy.types.Operator):
+    bl_idname = "tiny2drig.initialize_rig"
     bl_label = "Initialize Armature"
     bl_description = "Create Drivers and Custom Properties on current Armature for use in Tiny Rig Control panel"
     bl_options = {"REGISTER", "UNDO"}
@@ -506,8 +506,8 @@ class RIGTOOLS_initialize_rig(bpy.types.Operator):
 old_action = None
 
 
-class RIGTOOLS_toggle_enable_action(RIGTOOLS_turnaround_base_class):
-    bl_idname = "rigools.enable_offset_action"
+class TINY2DRIG_toggle_enable_action(TINY2DRIG_turnaround_base_class):
+    bl_idname = "tiny2drig.enable_offset_action"
     bl_label = "Edit Turnaround Action"
     bl_description = "Set turnaround action from target armature as the active action and hide all action constraints to allow easy editing of turnaround"
     bl_options = {"REGISTER", "UNDO"}
@@ -554,8 +554,8 @@ class RIGTOOLS_toggle_enable_action(RIGTOOLS_turnaround_base_class):
         return {"FINISHED"}
 
 
-class RIGTOOLS_load_action(RIGTOOLS_turnaround_base_class):
-    bl_idname = "rigools.load_action"
+class TINY2DRIG_load_action(TINY2DRIG_turnaround_base_class):
+    bl_idname = "tiny2drig.load_action"
     bl_label = "Refresh Offset Action"
     bl_description = "Get Action data-block from target armature's constraints"
     bl_options = {"UNDO"}
@@ -577,8 +577,8 @@ class RIGTOOLS_load_action(RIGTOOLS_turnaround_base_class):
         return {"FINISHED"}
 
 
-class RIGTOOLS_add_action_const_to_bone(RIGTOOLS_turnaround_base_class):
-    bl_idname = "rigools.add_action_const_to_bone"
+class TINY2DRIG_add_action_const_to_bone(TINY2DRIG_turnaround_base_class):
+    bl_idname = "tiny2drig.add_action_const_to_bone"
     bl_label = "Add Offset to Selected Bones"
     bl_description = """If a bone is included in the active_object's 'Offset Action' add constraint to move bone via action constraint. This will also add a driver back to the Body/Head Poses"""
     bl_options = {"UNDO"}
@@ -638,8 +638,8 @@ class RIGTOOLS_add_action_const_to_bone(RIGTOOLS_turnaround_base_class):
         return {"FINISHED"}
 
 
-class RIGTOOLS_add_custom_prop(RIGTOOLS_rig_edit_base_class):
-    bl_idname = "rigools.add_custom_prop"
+class TINY2DRIG_add_custom_prop(TINY2DRIG_rig_edit_base_class):
+    bl_idname = "tiny2drig.add_custom_prop"
     bl_label = "Add Custom Property"
     bl_description = """Create a Custom Integer Property. This Property can be used to control a driver on modifiers like Time Offset"""
     bl_options = {"UNDO"}
@@ -676,8 +676,8 @@ class RIGTOOLS_add_custom_prop(RIGTOOLS_rig_edit_base_class):
         return {"FINISHED"}
 
 
-class RIGTOOLS_gp_constraint_armature(RIGTOOLS_rig_gp_base_class):
-    bl_idname = "rigools.gp_constraint_armature"
+class TINY2DRIG_gp_constraint_armature(TINY2DRIG_rig_gp_base_class):
+    bl_idname = "tiny2drig.gp_constraint_armature"
     bl_label = "Parent with Armature Contraint"
     bl_description = """Rig the entire active grease pencil object, with an object contraint: Armature"""
     bl_options = {"UNDO"}
@@ -707,8 +707,8 @@ class RIGTOOLS_gp_constraint_armature(RIGTOOLS_rig_gp_base_class):
         return {"FINISHED"}
 
 
-class RIGTOOLS_gp_vertex_by_layer(RIGTOOLS_rig_gp_base_class):
-    bl_idname = "rigools.gp_vertex_by_layer"
+class TINY2DRIG_gp_vertex_by_layer(TINY2DRIG_rig_gp_base_class):
+    bl_idname = "tiny2drig.gp_vertex_by_layer"
     bl_label = "Parent with Armature Deform"
     bl_description = """Rig Grease Pencil with Armature Modifier. Optionally create empty groups from pose bones in target armature. Optionally assign all strokes (from all frames) in active GP layer to selectd bone"""
     bl_options = {"UNDO"}
@@ -781,8 +781,8 @@ class RIGTOOLS_gp_vertex_by_layer(RIGTOOLS_rig_gp_base_class):
         return {"FINISHED"}
 
 
-class RIGTOOLS_gp_rig_via_lattice(RIGTOOLS_rig_gp_base_class):
-    bl_idname = "rigools.gp_rig_via_lattice"
+class TINY2DRIG_gp_rig_via_lattice(TINY2DRIG_rig_gp_base_class):
+    bl_idname = "tiny2drig.gp_rig_via_lattice"
     bl_label = "Parent Object with Lattice Modifier"
     bl_description = """Rig Active Object by Creating Lattice, and adding Vertex Groups from Selected Bone Group. Lattice is deformed with Armature Modifier. Vertex Group/Weights are created but not assigned"""
     bl_options = {"UNDO"}
@@ -840,8 +840,8 @@ class RIGTOOLS_gp_rig_via_lattice(RIGTOOLS_rig_gp_base_class):
         return {"FINISHED"}
 
 
-class RIGTOOLS_gp_add_time_offset_with_driver(RIGTOOLS_rig_gp_base_class):
-    bl_idname = "rigtools.gp_add_time_offset_with_driver"
+class TINY2DRIG_gp_add_time_offset_with_driver(TINY2DRIG_rig_gp_base_class):
+    bl_idname = "tiny2drig.gp_add_time_offset_with_driver"
     bl_label = "Add Time Offset with Driver"
     bl_description = """Add Time Offset modifier with Driver from Rig Properties"""
     bl_options = {"UNDO"}
@@ -881,18 +881,18 @@ class RIGTOOLS_gp_add_time_offset_with_driver(RIGTOOLS_rig_gp_base_class):
 
 
 classes = (
-    RIGTOOLS_OT_create_armatue,
-    RIGTOOLS_add_action_const_to_bone,
-    RIGTOOLS_toggle_enable_action,
-    RIGTOOLS_load_action,
-    RIGTOOLS_initialize_rig,
-    RIGTOOLS_gp_set_mod_const,
-    RIGTOOLS_gp_set_mod_const_all,
-    RIGTOOLS_add_custom_prop,
-    RIGTOOLS_gp_constraint_armature,
-    RIGTOOLS_gp_vertex_by_layer,
-    RIGTOOLS_gp_rig_via_lattice,
-    RIGTOOLS_gp_add_time_offset_with_driver,
+    TINY2DRIG_OT_create_armatue,
+    TINY2DRIG_add_action_const_to_bone,
+    TINY2DRIG_toggle_enable_action,
+    TINY2DRIG_load_action,
+    TINY2DRIG_initialize_rig,
+    TINY2DRIG_gp_set_mod_const,
+    TINY2DRIG_gp_set_mod_const_all,
+    TINY2DRIG_add_custom_prop,
+    TINY2DRIG_gp_constraint_armature,
+    TINY2DRIG_gp_vertex_by_layer,
+    TINY2DRIG_gp_rig_via_lattice,
+    TINY2DRIG_gp_add_time_offset_with_driver,
 )
 
 

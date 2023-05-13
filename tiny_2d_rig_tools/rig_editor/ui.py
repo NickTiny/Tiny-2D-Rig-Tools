@@ -3,33 +3,33 @@ import bpy
 from tiny_2d_rig_tools.rig_editor.core import check_modifier_and_constraint_viewport
 
 
-class SEQUENCER_PT_rig_settings(bpy.types.Panel):
+class TINY2DRIG_PT_rig_settings(bpy.types.Panel):
     bl_space_type = "VIEW_3D"
     bl_region_type = "UI"
-    bl_idname = "SEQUENCER_PT_rig_settings"
+    bl_idname = "TINY2DRIG_PT_rig_settings"
     bl_label = "Rig Settings"
     bl_category = "Tiny Rig Edit"
 
     def draw(self, context):
         layout = self.layout
-        layout.operator("rigools.create_2d_armature")
+        layout.operator("tiny2drig.create_2d_armature")
         layout.prop(context.scene, "target_armature" )
         obj = context.scene.target_armature
         if obj is not None and obj.type == "ARMATURE" :
             self.layout.prop_search(
                     context.scene, "property_bone_name", obj.id_data.pose, "bones", text="Property Bone"
                 )
-        layout.operator("rigools.initialize_rig")
+        layout.operator("tiny2drig.initialize_rig")
         if obj is None or not obj.tiny_rig.is_rig:
             self.layout.label(text="Rig not Found", icon="ARMATURE_DATA")
             return
         layout.label(text=f"Turnaround Length: {obj.tiny_rig.pose_length}")        
 
 
-class SEQUENCER_PT_turnaround_editor(bpy.types.Panel):
+class TINY2DRIG_PT_turnaround_editor(bpy.types.Panel):
     bl_space_type = "VIEW_3D"
     bl_region_type = "UI"
-    bl_idname = "SEQUENCER_PT_turnaround_editor"
+    bl_idname = "TINY2DRIG_PT_turnaround_editor"
     bl_label = "Turnaround Editor"
     bl_category = "Tiny Rig Edit"
 
@@ -52,9 +52,9 @@ class SEQUENCER_PT_turnaround_editor(bpy.types.Panel):
         action_row.enabled = editor_active
         action_row.prop(obj, "offset_action", text="Action")
 
-        action_row.operator("rigools.load_action", icon="FILE_REFRESH", text="")
+        action_row.operator("tiny2drig.load_action", icon="FILE_REFRESH", text="")
         
-        editor_col.operator("rigools.enable_offset_action", icon="ACTION_TWEAK", depress=not(editor_active)).enable = editor_active
+        editor_col.operator("tiny2drig.enable_offset_action", icon="ACTION_TWEAK", depress=not(editor_active)).enable = editor_active
         if (
             context.window_manager.offset_editor_active
             and context.active_object.mode != "POSE"
@@ -63,18 +63,18 @@ class SEQUENCER_PT_turnaround_editor(bpy.types.Panel):
             editor_col.alert = True
             editor_col.separator()
             editor_col.label(icon="ERROR",text="Offset Editor is still Active")
-        layout.operator("rigools.add_action_const_to_bone", icon="CONSTRAINT_BONE")
+        layout.operator("tiny2drig.add_action_const_to_bone", icon="CONSTRAINT_BONE")
         
         
-class SEQUENCER_PT_rig_grease_pencil(bpy.types.Panel):
+class TINY2DRIG_PT_rig_grease_pencil(bpy.types.Panel):
     bl_space_type = "VIEW_3D"
     bl_region_type = "UI"
-    bl_idname = "SEQUENCER_PT_rig_grease_pencil"
+    bl_idname = "TINY2DRIG_PT_rig_grease_pencil"
     bl_label = "Rig Grease Pencil"
     bl_category = "Tiny Rig Edit"
 
     def draw(self, context):
-        if context.active_object.type == "GPENCIL": 
+        if context.active_object and context.active_object.type == "GPENCIL": 
             status = check_modifier_and_constraint_viewport(context.active_object)
             context.window_manager.gpencil_editor = context.active_object
             box = self.layout.box()
@@ -84,36 +84,36 @@ class SEQUENCER_PT_rig_grease_pencil(bpy.types.Panel):
                 context.window_manager, "gpencil_editor", text="", icon="OUTLINER_OB_GREASEPENCIL"
             )
             obj_row.enabled = True
-            obj_row.operator("rigools.enable_gp_mod_const", text="", icon=("HIDE_OFF" if status else "HIDE_ON"), depress=status).enabled = not(status)
+            obj_row.operator("tiny2drig.enable_gp_mod_const", text="", icon=("HIDE_OFF" if status else "HIDE_ON"), depress=status).enabled = not(status)
         else:
             warn_row = self.layout.box()
             warn_row.label(
                 text=f"Active Object is not Grease Pencil", icon="INFO"
             )
-        self.layout.operator("rigools.enable_all_gp_mod_const_all", icon="HIDE_OFF")
+        self.layout.operator("tiny2drig.enable_all_gp_mod_const_all", icon="HIDE_OFF")
         layout = self.layout
         col = layout.column(align=True)
-        col.operator("rigools.gp_constraint_armature", icon="CONSTRAINT")
-        col.operator("rigools.gp_vertex_by_layer",
+        col.operator("tiny2drig.gp_constraint_armature", icon="CONSTRAINT")
+        col.operator("tiny2drig.gp_vertex_by_layer",
                      icon="OUTLINER_DATA_GP_LAYER")
-        col.operator("rigools.gp_rig_via_lattice", icon="MOD_LATTICE")
+        col.operator("tiny2drig.gp_rig_via_lattice", icon="MOD_LATTICE")
         layout.operator(
             "rigtools.gp_add_time_offset_with_driver", icon="MOD_TIME")
         
 
 
 
-class SEQUENCER_PT_rig_properties(bpy.types.Panel):
+class TINY2DRIG_PT_rig_properties(bpy.types.Panel):
     bl_space_type = "VIEW_3D"
     bl_region_type = "UI"
-    bl_idname = "SEQUENCER_PT_rig_properties"
+    bl_idname = "TINY2DRIG_PT_rig_properties"
     bl_label = "Rig Properties"
     bl_category = "Tiny Rig Edit"
-    bl_parent_id = "SEQUENCER_PT_rig_settings"
+    bl_parent_id = "TINY2DRIG_PT_rig_settings"
 
     def draw(self, context):    
         obj = context.scene.target_armature
-        self.layout.operator("rigools.add_custom_prop", icon="PLUS")
+        self.layout.operator("tiny2drig.add_custom_prop", icon="PLUS")
         self.layout.separator()
 
         # Time Offset Properties
@@ -151,10 +151,10 @@ class SEQUENCER_PT_rig_properties(bpy.types.Panel):
 
 
 classes = (
-    SEQUENCER_PT_rig_settings,
-    SEQUENCER_PT_turnaround_editor,
-    SEQUENCER_PT_rig_properties,
-    SEQUENCER_PT_rig_grease_pencil,
+    TINY2DRIG_PT_rig_settings,
+    TINY2DRIG_PT_turnaround_editor,
+    TINY2DRIG_PT_rig_properties,
+    TINY2DRIG_PT_rig_grease_pencil,
 )
 
 

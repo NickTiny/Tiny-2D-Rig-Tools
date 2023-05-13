@@ -1,10 +1,10 @@
 import bpy
 
 
-class SEQUENCER_PT_rig_control(bpy.types.Panel):
+class TINY2DRIG_PT_rig_control(bpy.types.Panel):
     bl_space_type = "VIEW_3D"
     bl_region_type = "UI"
-    bl_idname = "SEQUENCER_PT_rig_control"
+    bl_idname = "TINY2DRIG_PT_rig_control"
     bl_label = "Tiny Rig Controller"
     bl_category = "Tiny Rig Control"
 
@@ -16,12 +16,12 @@ class SEQUENCER_PT_rig_control(bpy.types.Panel):
         col.label(text=f"{side_str} {limb}")
         nudge_row = col.row(align=True)
         nudge_row.operator(
-            "rigcontrol.bone_nudge_backward",
+            "tiny2drig.bone_nudge_backward",
             icon="REMOVE",
             text=f"{side_str} Back",
         ).bone_name = f"{pref_side}{limb}{nudge_suffix}"
         nudge_row.operator(
-            "rigcontrol.bone_nudge_forward",
+            "tiny2drig.bone_nudge_forward",
             icon="ADD",
             text=f"{side_str} Forward",
         ).bone_name = f"{pref_side}{limb}{nudge_suffix}"
@@ -97,13 +97,13 @@ class SEQUENCER_PT_rig_control(bpy.types.Panel):
         bone = self.prop_bone
         body_offset = 1 if name == self.rig_prefs.pose_body else 0
         pose_row = layout.row(align=True)
-        pose_row.operator("rigcontrol.set_turnaround", icon="BACK", text="").values = (
+        pose_row.operator("tiny2drig.set_turnaround", icon="BACK", text="").values = (
             body_offset * -1,
             -1,
         )
         pose_row.prop(bone, f'["{name}"]')
         pose_row.operator(
-            "rigcontrol.set_turnaround", icon="FORWARD", text=""
+            "tiny2drig.set_turnaround", icon="FORWARD", text=""
         ).values = (body_offset, 1)
 
     def draw(self, context):
@@ -143,7 +143,7 @@ class SEQUENCER_PT_rig_control(bpy.types.Panel):
         self.draw_limb_column(right_col, self.rig_prefs.r_side)
 
 
-classes = (SEQUENCER_PT_rig_control,)
+classes = (TINY2DRIG_PT_rig_control,)
 
 
 def register():

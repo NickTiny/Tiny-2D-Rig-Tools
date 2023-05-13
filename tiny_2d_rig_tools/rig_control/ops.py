@@ -6,8 +6,8 @@ from tiny_2d_rig_tools.rig_control.core import (
     change_pose,
 )
 
-class RIGCONTROL_bone_nudge_backward(bpy.types.Operator):
-    bl_idname = "rigcontrol.bone_nudge_backward"
+class TINY2DRIG_bone_nudge_backward(bpy.types.Operator):
+    bl_idname = "tiny2drig.bone_nudge_backward"
     bl_label = "Nudge Bone Backward"
     bl_description = "Nudge Limb chain backward in space"
 
@@ -17,8 +17,8 @@ class RIGCONTROL_bone_nudge_backward(bpy.types.Operator):
         return nudge_bone(self, context.active_object.pose.bones[self.bone_name], True)
 
 
-class RIGCONTROL_bone_nudge_forward(bpy.types.Operator):
-    bl_idname = "rigcontrol.bone_nudge_forward"
+class TINY2DRIG_bone_nudge_forward(bpy.types.Operator):
+    bl_idname = "tiny2drig.bone_nudge_forward"
     bl_label = "Nudge Bone Forward"
     bl_description = "Nudge Limb chain forward in space"
 
@@ -27,8 +27,8 @@ class RIGCONTROL_bone_nudge_forward(bpy.types.Operator):
     def execute(self, context): 
         return nudge_bone(self, context.active_object.pose.bones[self.bone_name], False)
     
-class RIGCONTROL_set_turnaround(bpy.types.Operator):
-    bl_idname = "rigcontrol.set_turnaround"
+class TINY2DRIG_set_turnaround(bpy.types.Operator):
+    bl_idname = "tiny2drig.set_turnaround"
     bl_label = "Change Turaround"
     bl_description = "+/- current head turnaround value for Body & Head"
 
@@ -40,9 +40,9 @@ class RIGCONTROL_set_turnaround(bpy.types.Operator):
 
 
 classes = (
-    RIGCONTROL_bone_nudge_backward,
-    RIGCONTROL_bone_nudge_forward,
-    RIGCONTROL_set_turnaround,
+    TINY2DRIG_bone_nudge_backward,
+    TINY2DRIG_bone_nudge_forward,
+    TINY2DRIG_set_turnaround,
     
     
 )

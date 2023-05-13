@@ -54,7 +54,7 @@ def get_appendage_bones(rig_pref):
     ]
 
 
-class Tiny_Rig_Preferences(bpy.types.AddonPreferences):
+class TINY2DRIG_Addon_Preferences(bpy.types.AddonPreferences):
     """
     Addon preferences to kitsu. Holds variables that are important for authentication and configuring
     how some of the operators work.
@@ -113,7 +113,7 @@ class Tiny_Rig_Preferences(bpy.types.AddonPreferences):
         self.draw_box(layout, prefs, bone_groups, "Bone Group Names", "GROUP_BONE")
 
 
-class Tiny_Rig_Prefs(bpy.types.PropertyGroup):
+class TINY2DRIG_Rig_Preferences(bpy.types.PropertyGroup):
     name: bpy.props.StringProperty(name="", default="")
 
     # Prefix
@@ -206,14 +206,14 @@ class Tiny_Rig_Prefs(bpy.types.PropertyGroup):
     )
 
 
-classes = (Tiny_Rig_Preferences, Tiny_Rig_Prefs)
+classes = (TINY2DRIG_Addon_Preferences, TINY2DRIG_Rig_Preferences)
 
 
 def register():
     for cls in classes:
         bpy.utils.register_class(cls)
     bpy.types.WindowManager.tiny_rig_prefs = bpy.props.PointerProperty(
-        type=Tiny_Rig_Prefs
+        type=TINY2DRIG_Rig_Preferences
     )
 
 
