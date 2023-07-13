@@ -67,13 +67,16 @@ class TINY2DRIG_PT_rig_control(bpy.types.Panel):
             )
         hand_row.prop(bone, f'["{side}{hand}"]', text=f"{side.replace('_','')} {hand}")
         # Name of UI Props for Mirror are hard coded
-        mirror_prop_name = "R_Hand_Flip" if side == rig_prefs.r_side else "L_Hand_Flip"
-        hand_row.prop(
-            bpy.context.window_manager.tiny_rig_ui,
-            mirror_prop_name,
-            icon="MOD_MIRROR",
-            text="",
-        )
+        if bone.id_data.tiny_rig.set_appendage_flip:
+            mirror_prop_name = (
+                "R_Hand_Flip" if side == rig_prefs.r_side else "L_Hand_Flip"
+            )
+            hand_row.prop(
+                bpy.context.window_manager.tiny_rig_ui,
+                mirror_prop_name,
+                icon="MOD_MIRROR",
+                text="",
+            )
 
         # Draw Leg
         leg = rig_prefs.leg
@@ -85,13 +88,16 @@ class TINY2DRIG_PT_rig_control(bpy.types.Panel):
                 leg,
             )
         # Name of UI Props for Mirror are hard coded
-        mirror_prop_name = "R_Foot_Flip" if side == rig_prefs.r_side else "L_Foot_Flip"
-        col.prop(
-            bpy.context.window_manager.tiny_rig_ui,
-            mirror_prop_name,
-            icon="MOD_MIRROR",
-            text=f"Mirror {side.replace('_','')} {rig_prefs.foot}",
-        )
+        if bone.id_data.tiny_rig.set_appendage_flip:
+            mirror_prop_name = (
+                "R_Foot_Flip" if side == rig_prefs.r_side else "L_Foot_Flip"
+            )
+            col.prop(
+                bpy.context.window_manager.tiny_rig_ui,
+                mirror_prop_name,
+                icon="MOD_MIRROR",
+                text=f"Mirror {side.replace('_','')} {rig_prefs.foot}",
+            )
 
     def draw_pose_row(self, layout, name):
         bone = self.prop_bone
