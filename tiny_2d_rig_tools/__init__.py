@@ -16,7 +16,7 @@ bl_info = {
     "author": "Nick Alberelli",
     "description": "Tools to Create and Rig 2D Cut-Out style characters with Grease Pencil Objects.",
     "blender": (3, 3, 0),
-    "version": (0, 0, 1),
+    "version": (0, 0, 2),
     "location": "3D View> Sidebar > Tiny Rig",
     "warning": "",
     "category": "Animation",
